@@ -1,0 +1,27 @@
+@import '@uiw/react-markdown-editor/markdown-editor.css';
+@import '@uiw/react-markdown-preview/markdown.css';
+
+html,
+body,
+#__next {
+    height: 100%;
+    min-width: 320px;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+// так как qb-dragging вешается на body, поэтому стили для отключения user-select описаны здесь
+.qb-dragging * {
+    user-select: none;
+}

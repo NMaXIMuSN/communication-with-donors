@@ -1,0 +1,5 @@
+-- CreateEnum
+CREATE TYPE "Entity" AS ENUM ('SEGMENT', 'SOURCE', 'CAMPAIGN', 'USER', 'TEMPLATE');
+
+-- CreateEnum
+CREATE TYPE "Action" AS ENUM ('VIEW', 'CREATE', 'DELETE', 'EDIT', 'SEARCH');

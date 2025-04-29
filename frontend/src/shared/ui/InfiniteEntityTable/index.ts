@@ -1,0 +1,1 @@
+export {InfiniteEntityTable} from './InfiniteEntityTable';

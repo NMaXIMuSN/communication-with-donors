@@ -1,0 +1,29 @@
+.titleWithIcon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+
+  &.info {
+    background-color: var(--g-color-base-info-light);
+    color: var(--g-color-text-info-heavy);
+  }
+
+  &.warning {
+    background-color: var(--g-color-base-warning-light);
+    color: var(--g-color-text-warning-heavy);
+  }
+
+  &.utility {
+    background-color: var(--g-color-base-utility-light);
+    color: var(--g-color-text-utility-heavy);
+  }
+}

@@ -1,0 +1,290 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model RegisterUser {
+  id    Int    @id @default(autoincrement())
+  email String @unique
+  hash  String @unique
+  role  Role[]
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  role Role[]
+
+  createdSources  Source[]   @relation("CreatedSources")
+  editedSources   Source[]   @relation("EditedSources")
+  createdSegment  Segment[]  @relation("CreatedSegment")
+  editedSegment   Segment[]  @relation("EditedSegment")
+  createdCampaign Campaign[] @relation("CreatedCampaign")
+  createdTemplate Template[] @relation("CreatedTemplate")
+  editedTemplate  Template[] @relation("EditedTemplate")
+}
+
+enum Entity {
+  SEGMENT
+  SOURCE
+  CAMPAIGN
+  USER
+  TEMPLATE
+}
+
+enum Action {
+  VIEW
+  CREATE
+  DELETE
+  EDIT
+  SEARCH
+}
+
+model Role {
+  id           Int            @id @default(autoincrement())
+  name         String         @unique
+  permissions  Permission[]
+  RegisterUser RegisterUser[]
+  users        User[]
+}
+
+model Permission {
+  id    Int    @id @default(autoincrement())
+  value String @unique
+  roles Role[]
+}
+
+// Таблицы источников данных (из каких таблиц берем данные)
+model Source {
+  id          Int         @id @default(autoincrement())
+  name        String // Название источника, удобочитаемое имя
+  systemName  String      @unique // Системное Название источника, удобочитаемое имя
+  tableName   String // физическое имя таблицы в БД
+  description String?
+  attributes  Attribute[] // Атрибуты источника
+  segments    Segment[] // зависимости сегментов
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   User?    @relation(fields: [createdById], references: [id], name: "CreatedSources")
+  createdById Int?
+  updatedBy   User?    @relation(fields: [updatedById], references: [id], name: "EditedSources")
+  updatedById Int?
+}
+
+enum DataType {
+  INT
+  REAL
+  TEXT
+  DATE
+  TIME
+  TIMESTAMP
+  BOOLEAN
+}
+
+enum DataUnit {
+  WHERE
+}
+
+enum DataControl {
+  STRING
+  STRING_SELECT
+  INTEGER
+  BOOLEAN
+  DATE
+  GENDER
+}
+
+// Атрибуты таблиц источников данных
+model Attribute {
+  id            Int         @id @default(autoincrement())
+  source        Source      @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+  sourceId      Int
+  systemName    String
+  name          String? // Имя столбца, атрибута таблицы
+  control       DataControl // тип ввода нужно для клиентской части
+  type          DataType // тип поля в таблице
+  unit          DataUnit // Агрегат
+  isActive      Boolean
+  allowedValues Json? // допустимые значения если есть
+}
+
+enum SegmentStatus {
+  DRAFT
+  ERROR
+  CALCULATED
+  PROGRESS
+}
+
+// Сегменты для фильтрации доноров
+model Segment {
+  id           Int           @id @default(autoincrement())
+  name         String
+  description  String?
+  filter       Json?
+  source       Source[]
+  sourceId     Int[]
+  status       SegmentStatus @default(DRAFT)
+  campaigns    Campaign[] // Множество кампаний используют сегменты
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  createdBy    User?         @relation(fields: [createdById], references: [id], name: "CreatedSegment")
+  createdById  Int?
+  updatedBy    User?         @relation(fields: [updatedById], references: [id], name: "EditedSegment")
+  updatedById  Int?
+  segmentUsers SegmentUser[]
+  limit        Int?
+}
+
+model SegmentUser {
+  id        Int      @id @default(autoincrement())
+  segmentId Int
+  donorId   Int
+  createdAt DateTime @default(now())
+
+  segment Segment @relation(fields: [segmentId], references: [id], onDelete: Cascade)
+}
+
+enum TemplateType {
+  EMAIL
+  TELEGRAM
+}
+
+// Таблица шаблонов коммуникаций
+model Template {
+  id          Int                @id @default(autoincrement())
+  name        String
+  description String?
+  type        TemplateType
+  campaigns   Campaign[]
+  creative    Creative[]
+  settings    TemplateSettings[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   User?    @relation(fields: [createdById], references: [id], name: "CreatedTemplate")
+  createdById Int?
+  updatedBy   User?    @relation(fields: [updatedById], references: [id], name: "EditedTemplate")
+  updatedById Int?
+}
+
+enum Language {
+  RU
+  EN
+}
+
+model TemplateSettings {
+  id         Int         @id @default(autoincrement())
+  lang       Language
+  subject    String?
+  content    String
+  template   Template    @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  templateId Int
+  offers     Offers[]
+  OffersLog  OffersLog[]
+}
+
+// Статусы кампаний
+enum CampaignStatus {
+  DEACTIVATED
+  ACTIVE
+  COMPLETED
+}
+
+// Кампании по отправке сообщений
+model Campaign {
+  id                Int            @id @default(autoincrement())
+  name              String         @unique
+  description       String?
+  startAt           DateTime
+  endAt             DateTime
+  language          Language?
+  status            CampaignStatus @default(DEACTIVATED)
+  segment           Segment        @relation(fields: [segmentId], references: [id])
+  segmentId         Int
+  campaignTemplates Template[]
+  campaignChannels  Channels[]
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime?      @updatedAt
+  createdBy         User?          @relation(fields: [createdById], references: [id], name: "CreatedCampaign")
+  createdById       Int?
+  offers            Offers[]
+  OffersLog         OffersLog[]
+}
+
+enum ChannelType {
+  EMAIL
+  TELEGRAM
+}
+
+model Channels {
+  id         Int         @id @default(autoincrement())
+  type       ChannelType
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  creatives  Creative[]
+  campaign   Campaign    @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  campaignId Int
+}
+
+enum CreativeStatus {
+  ACTIVE
+  DEACTIVATED
+}
+
+model Creative {
+  id         Int            @id @default(autoincrement())
+  type       ChannelType
+  channel    Channels       @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId  Int
+  templateId Int
+  lang       Language
+  template   Template       @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  status     CreativeStatus @default(DEACTIVATED)
+}
+
+model Offers {
+  id            Int              @id @default(autoincrement())
+  donorId       Int
+  channelType   ChannelType
+  setting       TemplateSettings @relation(fields: [settingId], references: [id], onDelete: Cascade)
+  settingId     Int
+  startAt       DateTime
+  finishAt      DateTime
+  includeTables String[]
+  campaign      Campaign         @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  campaignId    Int
+}
+
+enum StatusOffersLog {
+  SUCCESS
+  ERROR
+}
+
+model OffersLog {
+  id          Int              @id @default(autoincrement())
+  donorId     Int
+  channelType ChannelType
+  setting     TemplateSettings @relation(fields: [settingId], references: [id], onDelete: Cascade)
+  settingId   Int
+  campaign    Campaign         @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  campaignId  Int
+  status      StatusOffersLog
+  time        DateTime @default(now())
+  message     String?
+}

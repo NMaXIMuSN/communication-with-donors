@@ -1,0 +1,49 @@
+.border {
+  overflow: hidden;
+  margin: 0 !important;
+
+  & > * {
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
+    border: 1px solid transparent !important;
+    overflow: hidden;
+  }
+
+  &Start {
+    & > * {
+      border-radius: 8px 8px 0 0 !important;
+      border-block-end: 1px solid var(--g-color-line-generic) !important;
+    }
+  }
+
+  &Middle {
+    & > * {
+      border-radius: unset !important;
+      border-block-end: 1px solid var(--g-color-line-generic) !important;
+    }
+  }
+
+  &End {
+    & > * {
+      border-radius: 0 0 8px 8px !important;
+    }
+  }
+
+  & > :global(.qb-placeholder) {
+    border: 1px dashed gray !important;
+  }
+}
+
+.ruleContainer {
+  margin-block-start: 8px;
+  margin-block-end: 8px;
+  padding-inline-end: 8px;
+
+  &:first-child {
+    margin-block-start: 0 !important;
+  }
+
+  &:last-child {
+    margin-block-end: 0 !important;
+  }
+}

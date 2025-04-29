@@ -1,0 +1,20 @@
+.card {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--g-color-base-simple-hover);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  transition: all .3s ease-in;
+
+  &:hover {
+    border-color: var(--g-color-line-brand);
+  }
+
+  &Disabled {
+    pointer-events: none;
+    color: var(--g-color-text-hint);
+    background: var(--g-color-base-generic-accent-disabled);
+  }
+}

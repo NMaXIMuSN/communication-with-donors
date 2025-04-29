@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.label {
+  transition: all 0.1s ease;
+  cursor: pointer;
+  width: 36px;
+  height: 24px;
+  border-radius: 5px;
+  border: 1px solid var(--g-color-line-generic);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.input {
+  display: none;
+
+  &:checked + .label {
+    color: var(--g-color-line-danger);
+    border: 1px solid var(--g-color-line-danger);
+
+    rect,
+    path {
+      fill-opacity: 1;
+      stroke-opacity: 1;
+    }
+  }
+}
+
+.radio {
+  max-height: 24px;
+
+  // Повышаем специфичность, потому что этот класс не перебивает дефолтный из RadioButton
+  :global(.g-radio-button__option) {
+    height: 24px !important;
+    line-height: 24px !important;
+  }
+}

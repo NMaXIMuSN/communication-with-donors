@@ -1,0 +1,37 @@
+.del {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  margin-inline-start: 8px;
+  color: var(--g-color-text-secondary);
+}
+
+.wrapper {
+  opacity: 1 !important;
+}
+
+.groupActions {
+  margin-inline-start: 10px;
+  display: flex;
+
+  &TL {
+    justify-content: flex-start;
+    margin-inline-start: 20px;
+  }
+
+  &BL {
+    justify-content: flex-start;
+  }
+
+  &TC,
+  &BC {
+    justify-content: center;
+  }
+
+  &TR,
+  &BR {
+    justify-content: flex-end;
+  }
+}

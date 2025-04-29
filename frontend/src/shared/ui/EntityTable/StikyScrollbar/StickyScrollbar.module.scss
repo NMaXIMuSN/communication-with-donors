@@ -1,0 +1,35 @@
+.container {
+  width: 100%;
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 3;
+
+  overflow-x: auto;
+
+  margin-block-start: -1px;
+
+  flex: 1 0;
+}
+
+.thumb {
+  position: relative;
+
+  height: 3px;
+
+  // Safari не отображает прозрачне элементы, даже если у низ есть высота, ширина и сролл-бар.
+  // Поэтому пришлось добавить почти прозрачный элемент 1x1 px
+  &::before {
+    content: '';
+
+    position: absolute;
+
+    inset-block-start: 0;
+    inset-inline-start: 0;
+
+    width: 1px;
+    height: 1px;
+
+    background-color: var(--g-color-scroll-handle);
+    border-radius: var(--g-scrollbar-width);
+  }
+}

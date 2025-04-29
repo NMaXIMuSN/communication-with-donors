@@ -1,0 +1,69 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DONOR_DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/@internal/prisma/client"
+}
+
+enum GenderData {
+  MANE
+  WOMEN
+}
+
+model Donor {
+  id          Int          @id @default(autoincrement())
+  fullName    String
+  birthDate   DateTime
+  gender      GenderData
+  address     String
+  phone       String?
+  email       String?
+  telegram    String?
+  vk          String?
+  medicalInfo MedicalInfo?
+  donations   Donation[]
+}
+
+enum BloodType {
+  O
+  A
+  B
+  AB
+}
+
+enum RHFactorType {
+  plus
+  minus
+}
+
+model MedicalInfo {
+  id           Int          @id @default(autoincrement())
+  bloodType    BloodType
+  rhFactor     RHFactorType
+  weight       Float
+  height       Float
+  lastDonation DateTime?
+  donor        Donor        @relation(fields: [donorId], references: [id])
+  donorId      Int          @unique
+}
+
+enum DonationType {
+  WHOLE_BLOOD
+  RED_BLOOD_CELLS
+  PLASMA
+  PLATELETS
+  WHITE_BLOOD_CELLS
+}
+
+model Donation {
+  id               Int          @id @default(autoincrement())
+  donor            Donor        @relation(fields: [donorId], references: [id], onDelete: Cascade)
+  donorId          Int
+  donationDate     DateTime
+  donationType     DonationType
+  bloodVolume      Float
+  donationLocation String
+}

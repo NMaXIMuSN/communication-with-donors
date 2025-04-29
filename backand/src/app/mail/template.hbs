@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Campaign</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header, .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+        }
+        .unsubscribe {
+            color: #ff6b6b;
+            font-size: 0.9em;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Our Organization</h2>
+        </div>
+        <div class="content">
+            {{{dynamicContent}}} <!-- Динамический контент -->
+        </div>
+        <div class="footer">
+            <p class="unsubscribe">
+                If you wish to unsubscribe from future communications, please <a href="{{unsubscribeLink}}">click here</a>.
+            </p>
+            <p>&copy; {{year}} Your Organization. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+.list {
+  width: 400px;
+
+  :global(.g-list__filter) {
+    padding: 16px;
+  }
+
+  &Item {
+    padding: 0 16px;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+}

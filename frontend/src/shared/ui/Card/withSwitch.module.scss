@@ -1,0 +1,12 @@
+.header {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.error {
+  padding-inline-start: 20px;
+  padding-inline-end: 20px;
+}

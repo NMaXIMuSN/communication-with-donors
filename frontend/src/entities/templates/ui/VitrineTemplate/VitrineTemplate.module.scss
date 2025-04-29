@@ -1,0 +1,28 @@
+.header {
+  padding: 8px 12px;
+  height: 50px;
+  display: flex; align-items: center;
+  border-bottom: 1px solid var(--g-color-line-generic);
+
+  &Left {
+    border-right: 1px solid var(--g-color-line-generic);
+  }
+}
+
+.content {
+  padding-block: 20px;
+  height: 720px;
+
+  > * {
+    height: 100%;
+    width: 100%;
+  }
+
+  &Left {
+    border-right: 1px solid var(--g-color-line-generic);
+    padding-inline: 12px;
+  }
+  &Right {
+    padding-inline: 12px;
+  }
+}

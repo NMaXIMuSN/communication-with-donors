@@ -1,0 +1,25 @@
+{
+    "extends": [
+        "@gravity-ui/eslint-config",
+        "@gravity-ui/eslint-config/prettier"
+    ],
+    "plugins": [
+        "eslint-plugin-react",
+        "eslint-plugin-react-hooks",
+        "@next/eslint-plugin-next"
+    ],
+    "root": true,
+    "env": {
+        "node": true,
+        "jest": true
+    },
+    "rules": {
+        "@typescript-eslint/member-ordering": "off",
+        "new-cap": "off",
+        "guard-for-in": "off",
+        "prefer-const": "off",
+        "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+        "no-eq-null": "off",
+        "no-prototype-builtins": "off"
+    }
+}

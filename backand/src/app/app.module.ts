@@ -1,18 +1,34 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { BullModule } from '@nestjs/bull';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { SourcesModule } from './sources/sources.module';
+import { SegmentsModule } from './segments/segments.module';
+import { CampaignsModule } from './campaigns/campaigns.module';
+import { TemplatesModule } from './templates/templates.module';
+import { OffersModule } from './offers/offers.module';
+import { TelegramModule } from './telegram/telegram.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { DonorsModule } from './donors/donors.module';
+import { MailModule } from './mail/mail.module';
+import { PermissionsModule } from './permissions/permissions.module';
+import { PermissionsService } from './permissions/permissions.service';
 
 @Module({
   imports: [
-    BullModule.forRoot({
-      connection: {
-        host: 'localhost',
-        port: 6379,
-      },
-    }),
+    PermissionsModule,
+    UsersModule,
+    AuthModule,
+    SourcesModule,
+    SegmentsModule,
+    CampaignsModule,
+    TemplatesModule,
+    OffersModule,
+    TelegramModule,
+    ScheduleModule.forRoot(),
+    DonorsModule,
+    MailModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [PermissionsService],
 })
 export class AppModule {}

@@ -1,0 +1,17 @@
+.copyButtonLeftSpace {
+  margin-inline-start: 8px;
+  min-width: 24px;
+}
+
+.copyButtonRightSpace {
+  margin-inline-end: 8px;
+  min-width: 24px;
+}
+
+.container {
+  display: flex;
+
+  flex-wrap: nowrap;
+
+  align-items: center;
+}

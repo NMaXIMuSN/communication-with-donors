@@ -1,0 +1,9 @@
+.wrapper {
+  padding: 20px;
+  min-width: 700px;
+  padding-inline-end: 0;
+
+  & > * {
+    padding-inline-end: 0 !important;
+  }
+}

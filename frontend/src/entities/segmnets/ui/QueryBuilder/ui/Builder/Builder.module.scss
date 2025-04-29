@@ -1,0 +1,159 @@
+.wrapper {
+  width: 100%;
+  flex: 1;
+  display: flex;
+
+  :global(.rule) {
+    padding: 0 !important;
+    background-color: unset !important;
+  }
+
+  :global(.qb-draggable) {
+    position: fixed !important;
+    padding-block-start: 4px;
+    padding-block-end: 4px;
+    padding-inline-start: 8px;
+    padding-inline-end: 8px;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px 0 var(--g-color-sfx-shadow);
+    background-color: white;
+    color: black;
+
+    pointer-events: none;
+
+    z-index: 1000;
+  }
+
+  :global(.group-or-rule-placeholder__bottom) {
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      inset-block-end: 0;
+      inset-inline-start: 0;
+      width: calc(100% - 10px);
+      height: 2px;
+      background-color: var(--g-color-text-info);
+    }
+  }
+
+  :global(.group-or-rule-placeholder__top) {
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      inset-block-start: 0;
+      inset-inline-start: 0;
+      width: calc(100% - 10px);
+      height: 2px;
+      background-color: var(--g-color-text-info);
+    }
+  }
+
+  :global(.query-builder-container) {
+    padding: unset !important;
+    flex: 1 !important;
+    display: flex !important;
+    position: relative;
+  }
+
+  :global(.query-builder) {
+    margin: unset;
+    font-family: var(--g-font-family-sans);
+    font-size: unset;
+    line-height: unset;
+    overflow: unset;
+  }
+
+  :global(.group--header::before) {
+    content: unset !important;
+  }
+
+  :global(.group-or-rule::before) {
+    content: unset !important;
+  }
+
+  :global(.group-or-rule::after) {
+    content: unset !important;
+  }
+
+  :global(.group-container) {
+    position: relative;
+  }
+}
+
+.builder {
+  font-family: var(--g-font-family-sans);
+  margin: unset;
+  display: flex;
+  flex: 1;
+
+  &Wrapper {
+    padding: 10px;
+    flex: 1;
+  }
+
+  :global(.locked) {
+    border: 1px dashed red;
+  }
+
+  :global(.qb-placeholder) {
+    border: 1px dashed gray;
+  }
+
+  &:global(.qb-dragging),
+  &:global(.qb-drag-handler),
+  &:global(.qb-dragging .qb-drag-handler) {
+    cursor: grabbing !important;
+  }
+
+  :global(.qb-draggable) {
+    pointer-events: none;
+    position: absolute;
+    opacity: 0.7;
+    z-index: 1001;
+    box-sizing: border-box;
+  }
+
+  :global(.group--drag-handler),
+  :global(.group--actions),
+  :global(.rule--drag-handler),
+  :global(.rule--header) {
+    transition: opacity 0.2s;
+  }
+
+  :global(.group--header:hover .group--header .group--drag-handler),
+  :global(.group--header:hover .group--header .group--actions),
+  :global(.group--header:not(:hover) .group--drag-handler),
+  :global(.group--header:not(:hover) .group--actions),
+  :global(.rule_group:not(:hover) .group--drag-handler),
+  :global(.rule_group:not(:hover) .group--actions) {
+    opacity: 0;
+  }
+
+  :global(.rule:hover .rule .rule--drag-handler),
+  :global(.rule:hover .rule .rule--header),
+  :global(.rule:not(:hover) .rule--drag-handler),
+  :global(.rule:not(:hover) .rule--header) {
+    opacity: 0;
+  }
+
+  &:global(.qb-dragging .rule--drag-handler),
+  &:global(.qb-dragging .rule--header),
+  &:global(.qb-dragging .group--drag-handler),
+  &:global(.qb-dragging .group--actions) {
+    opacity: 0 !important;
+  }
+
+  :global(.rule_group_ext .group--actions) {
+    flex: none;
+  }
+
+  :global(.group--header.hide--drag.with--conjs > .group--field--count--rule) {
+    margin-inline-start: 20px;
+  }
+}

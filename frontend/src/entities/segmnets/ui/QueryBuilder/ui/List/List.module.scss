@@ -1,0 +1,30 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-block-start: 20px;
+}
+
+.button {
+  height: 28px;
+  display: flex;
+  align-items: center;
+}
+
+.field {
+  padding: 7px;
+  border-radius: 5px;
+  word-break: keep-all;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--g-color-base-simple-hover);
+  }
+
+  .disabledOption {
+    cursor: default;
+    pointer-events: none;
+  }
+}
