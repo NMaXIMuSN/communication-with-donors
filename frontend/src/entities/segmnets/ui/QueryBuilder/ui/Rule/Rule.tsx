@@ -487,6 +487,7 @@ class Rule extends Component<IRule> {
             showLock &&
             !(isLocked && !isTrueLocked) &&
             Switch && (
+                // @ts-ignore
                 <Switch
                     value={isLocked}
                     setValue={this.setLock}

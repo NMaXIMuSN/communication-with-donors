@@ -79,6 +79,7 @@ export const VitrineTemplate: FC<IProps> = (props) => {
                 </Col>
 
                 <Col
+                    // @ts-ignore
                     s={leftS}
                     style={
                         !leftS
@@ -92,6 +93,7 @@ export const VitrineTemplate: FC<IProps> = (props) => {
                 </Col>
 
                 <Col
+                    // @ts-ignore
                     s={rightS}
                     style={
                         !rightS

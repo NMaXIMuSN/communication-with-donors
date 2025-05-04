@@ -4,7 +4,7 @@ import {useMailPreview} from '@/entities/templates/api/queryHook';
 import {debounce} from 'lodash';
 import {isIFrameElement, setHTML} from '@/shared/lib';
 
-export const EmailPreview: FC<ITemplatePreviewProps> = ({content, subject}) => {
+export const EmailPreview: FC<ITemplatePreviewProps> = ({content}) => {
     const {mutateAsync} = useMailPreview();
     const iframe = useRef<HTMLIFrameElement | null>(null);
 

@@ -44,6 +44,8 @@ export const TemplateContextProvider: FC<IProps & PropsWithChildren> = (props) =
                 text: 'Неудально обновить шаблон',
             });
         }
+
+        return
     };
 
     const currentLang = useMemo(() => {

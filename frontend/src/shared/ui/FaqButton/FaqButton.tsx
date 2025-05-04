@@ -41,13 +41,6 @@ const FaqButton = (props: Props) => {
         isMouseInFaq.current = false;
     }, [setClose]);
 
-    const onMousePoppUpLeave = useCallback(() => {
-        if (!isMouseInFaq.current) {
-            setClose();
-        }
-        isMouseInPopup.current = false;
-    }, [setClose]);
-
     useEffect(() => {
         if (bittonRef.current) {
             bittonRef.current.addEventListener('mouseover', hoverHandler);

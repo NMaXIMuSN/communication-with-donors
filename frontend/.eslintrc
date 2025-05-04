@@ -20,6 +20,7 @@
         "prefer-const": "off",
         "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
         "no-eq-null": "off",
-        "no-prototype-builtins": "off"
+        "no-prototype-builtins": "off",
+        "prettier/prettier": "off"
     }
 }

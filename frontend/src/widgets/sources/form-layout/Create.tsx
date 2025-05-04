@@ -9,7 +9,6 @@ export const CreateSource = () => {
         if (!user) return;
 
         await mutateAsync({
-            createdById: user.id,
             name: 'Тест источник',
             tableName: 'test_table',
             description: 'Тестовое описание',

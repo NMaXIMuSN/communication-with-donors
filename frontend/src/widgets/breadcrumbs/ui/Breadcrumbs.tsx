@@ -1,6 +1,6 @@
 'use client';
 
-import {Breadcrumbs as BreadcrumbsGravity, BreadcrumbsItem, Flex} from '@gravity-ui/uikit';
+import {Breadcrumbs as BreadcrumbsGravity, Flex} from '@gravity-ui/uikit';
 import Link from 'next/link';
 
 import styles from './Breadcrumbs.module.scss';

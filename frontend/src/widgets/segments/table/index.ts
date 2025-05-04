@@ -1,1 +1,1 @@
-export * from './ui/SourcesTable';
+export * from './ui/SegmentsTable';

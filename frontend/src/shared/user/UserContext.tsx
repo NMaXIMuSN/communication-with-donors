@@ -2,6 +2,7 @@
 
 import {FC, PropsWithChildren, createContext, useEffect, useState} from 'react';
 import {axios} from '../api/axios';
+import { Loader } from '@gravity-ui/uikit';
 
 export const UserContext = createContext({});
 
@@ -21,6 +22,10 @@ export const UserProvider: FC<PropsWithChildren> = ({children}) => {
 
         fetchUserData();
     }, []);
+
+    if (!userData) {
+        return <Loader />
+    }
 
     return <UserContext.Provider value={userData}>{children}</UserContext.Provider>;
 };

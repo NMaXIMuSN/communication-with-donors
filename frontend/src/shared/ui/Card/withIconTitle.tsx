@@ -1,6 +1,5 @@
 import { FC, PropsWithChildren } from 'react';
-import { Icon, Text } from '@gravity-ui/uikit';
-import { SVGIconData } from '@gravity-ui/uikit/build/esm/components/Icon/types';
+import { Icon, IconProps, Text } from '@gravity-ui/uikit';
 import cn from 'classnames';
 
 import { ICardProps } from './Card';
@@ -8,7 +7,7 @@ import { ICardProps } from './Card';
 import styles from './withIconTitle.module.scss';
 
 interface IHocProps {
-    icon: SVGIconData;
+    icon: IconProps['data'];
     iconTheme?: 'info' | 'warning' | 'utility';
 }
 

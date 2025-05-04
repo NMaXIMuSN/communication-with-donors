@@ -51,7 +51,7 @@ class Operator extends Component<IOperator> {
         const fieldConfig = getFieldConfig(config, selectedField);
         const operators = fieldConfig?.operators;
         const operatorOptions = mapValues(
-            pickBy(config.operators, (item, key) => operators?.indexOf(key) !== -1),
+            pickBy(config.operators, (_, key) => operators?.indexOf(key) !== -1),
             (_opts, op) => getOperatorConfig(config, op, selectedField),
         );
         const items = this.buildOptions(config, operatorOptions, operators);
@@ -79,7 +79,7 @@ class Operator extends Component<IOperator> {
         };
     }
 
-    buildOptions(config: IConfig, fields: any, ops?: string[]) {
+    buildOptions(_: IConfig, fields: any, ops?: string[]) {
         if (!fields || !ops) return null;
 
         return keys(fields)

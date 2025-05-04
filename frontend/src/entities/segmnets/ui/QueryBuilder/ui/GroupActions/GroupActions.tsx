@@ -62,6 +62,7 @@ export class GroupActions extends PureComponent<IGroupActions> {
             ];
 
         const setLockSwitch = Switch && showLock && !(isLocked && !isTrueLocked) && (
+            // @ts-ignore
             <Switch
                 value={isLocked}
                 setValue={setLock}

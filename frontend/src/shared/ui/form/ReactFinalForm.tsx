@@ -30,6 +30,8 @@ function ReactFinalForm<FormValues = Record<string, any>, InitialFormValues = Pa
         if (render) {
             return render(renderProps);
         }
+
+        return;
     };
 
     return (

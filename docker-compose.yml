@@ -2,25 +2,27 @@ version: '3.8'
 
 services:
   app:
-    build: .
+    build: ./backand
     ports:
       - "3000:3000"
     depends_on:
       - db
       - donorBb
+    env_file:
+      - ./backand/.env
     environment:
       - DATABASE_URL=postgresql://${DATABASE_USER}:${DATABASE_PASSWORD}@db:${DATABASE_PORT}/${DATABASE_NAME}
       - DONOR_DATABASE_URL=postgresql://${DONOR_DATABASE_USER}:${DONOR_DATABASE_PASSWORD}@donorBb:${DONOR_DATABASE_PORT}/${DONOR_DATABASE_NAME}
       - DONOR_DATABASE_PORT=5432
 
   frontend:
-    build: ../frontend
+    build: ./frontend
     ports:
       - "80:3000"
     depends_on:
       - app
     env_file:
-      - ../frontend/.env
+      - ./frontend/.env
   db:
     image: postgres:16
     ports:
