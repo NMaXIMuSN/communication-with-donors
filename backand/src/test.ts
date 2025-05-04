@@ -10,7 +10,7 @@ import { faker } from '@faker-js/faker'; // используем faker для г
 
 const prisma = new PrismaClient();
 
-export async function generateRandomDonorData(count: number = 100000) {
+export async function generateRandomDonorData(count: number = 100) {
   const donors: Prisma.DonorCreateArgs['data'][] = [];
 
   for (let i = 0; i < count; i++) {
@@ -77,4 +77,4 @@ export async function generateRandomDonorData(count: number = 100000) {
   ).catch((e) => console.log(e));
 }
 
-generateRandomDonorData(100000);
+generateRandomDonorData(100);
