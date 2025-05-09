@@ -23,7 +23,8 @@
     "generate:donor": "npx prisma generate --schema ./donorPrisma/schema.prisma",
     "migrate:donor": "npx prisma migrate dev --schema ./donorPrisma/schema.prisma",
     "generate": "npx prisma generate",
-    "migrate": "npx prisma migrate dev",
+    "migrate:app": "npx prisma migrate dev",
+    "migrate": "npm run migrate:donor && npm run migrate:app",
     "postbuild": "cp -r src/app/mail/template.hbs dist/app/mail/template.hbs && cp -r src/app/mail/confirmation.hbs dist/app/mail/confirmation.hbs"
   },
   "dependencies": {
