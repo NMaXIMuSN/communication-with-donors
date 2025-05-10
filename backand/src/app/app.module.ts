@@ -12,10 +12,12 @@ import { DonorsModule } from './donors/donors.module';
 import { MailModule } from './mail/mail.module';
 import { PermissionsModule } from './permissions/permissions.module';
 import { PermissionsService } from './permissions/permissions.service';
+import { PrismaModule } from './prisma.module';
 
 @Module({
   imports: [
     PermissionsModule,
+    PrismaModule,
     UsersModule,
     AuthModule,
     SourcesModule,

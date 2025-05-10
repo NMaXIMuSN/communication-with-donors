@@ -1,39 +1,39 @@
 .wrapper {
-  position: relative;
+    position: relative;
 
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .popup {
-  overflow: unset !important;
+    overflow: unset !important;
 }
 
 .icon {
-  position: absolute;
-  inset-inline-start: 7.5px;
+    position: absolute;
+    inset-inline-start: 7.5px;
 
-  svg,
-  path {
-    fill: var(--g-color-text-secondary);
-  }
+    svg,
+    path {
+        fill: var(--g-color-text-secondary);
+    }
 }
 
 .rightAlign {
-  inset-inline-start: unset;
-  inset-inline-end: 7.5px;
+    inset-inline-start: unset;
+    inset-inline-end: 7.5px;
 }
 
 .datePicker {
-  width: 100%;
-  padding-inline-start: 24px;
+    width: 100%;
+    padding-inline-start: 24px;
 
-  &::before {
-    border-radius: 6px;
-  }
+    &::before {
+        border-radius: 6px;
+    }
 }
 
 .iconAfterInput {
-  padding-inline-start: 0;
-  padding-inline-end: 24px;
+    padding-inline-start: 0;
+    padding-inline-end: 24px;
 }

@@ -18,6 +18,9 @@ const ONE_TEMPLATE = (id: number | string) => `${TEMPLATES}/${id}`;
 const CREATE_TEMPLATE = `${TEMPLATES}/create`;
 const EDIT_TEMPLATE = (id: number | string) => `${TEMPLATES}/${id}/edit`;
 
+const USERS = '/users';
+const SECURITY = '/security';
+
 export {
     SOURCES,
     ONE_SOURCES,
@@ -35,4 +38,6 @@ export {
     ONE_TEMPLATE,
     CREATE_TEMPLATE,
     EDIT_TEMPLATE,
+    USERS,
+    SECURITY,
 };

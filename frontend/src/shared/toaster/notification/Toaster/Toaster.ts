@@ -17,7 +17,7 @@ class MyToaster {
     add(options: Partial<IOptions>): void {
         const {
             name = getRandomId(),
-            type = 'normal',
+            type = 'success',
             autoHiding = DEFAULT_EXPIRED_IN_MS,
             text: title,
             className,

@@ -1,112 +1,112 @@
 .container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .isDialogContainer {
-  overflow-y: scroll;
+    overflow-y: scroll;
 
-  // c height не будет отображаться StickyScrollbar
-  min-height: 500px;
-  max-height: 500px;
+    // c height не будет отображаться StickyScrollbar
+    min-height: 500px;
+    max-height: 500px;
 }
 
 // Иконка сортировки
 .sortingIcon {
-  display: inline;
-  margin-inline-start: 4px;
-  margin-inline-end: 4px;
-  vertical-align: middle;
+    display: inline;
+    margin-inline-start: 4px;
+    margin-inline-end: 4px;
+    vertical-align: middle;
 }
 
 .unset {
-  opacity: 0;
+    opacity: 0;
 }
 
 .caretUp {
-  transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 
 .table {
-  width: 100%;
+    width: 100%;
 
-  :global(.gt-table__header) {
-    overflow-x: hidden;
-    z-index: 3;
-    background-color: var(--g-color-base-background);
-  }
-
-  :global(.gt-table__sort) {
-    &:hover .unset {
-      opacity: 0.5;
+    :global(.gt-table__header) {
+        overflow-x: hidden;
+        z-index: 3;
+        background-color: var(--g-color-base-background);
     }
-  }
+
+    :global(.gt-table__sort) {
+        &:hover .unset {
+            opacity: 0.5;
+        }
+    }
 }
 
 .tableBody {
-  width: 100%;
-  overflow-x: auto;
+    width: 100%;
+    overflow-x: auto;
 
-  scrollbar-width: none; /* Firefox */
-  &::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
-  }
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+    }
 }
 
 .rowStartPadding {
-  padding-inline-start: 23px;
+    padding-inline-start: 23px;
 }
 
 .headerRow {
-  border-block-end: 1px solid var(--g-color-line-generic);
+    border-block-end: 1px solid var(--g-color-line-generic);
 }
 
 // Класс для изначально скрытых элементов, которые будут показаны только при наведении
 .showContentOnlyOnRowHover {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 100ms;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 100ms;
 }
 
 .row {
-  min-width: 100%;
+    min-width: 100%;
 
-  &Border {
-    margin-block-start: -1px;
-    border-block-end: 1px solid var(--g-color-line-generic);
-  }
+    &Border {
+        margin-block-start: -1px;
+        border-block-end: 1px solid var(--g-color-line-generic);
+    }
 
-  &:hover .showContentOnlyOnRowHover {
-    opacity: 1;
-    pointer-events: all;
-  }
+    &:hover .showContentOnlyOnRowHover {
+        opacity: 1;
+        pointer-events: all;
+    }
 }
 
 .hover:hover {
-  cursor: pointer;
-  background: var(--g-color-base-simple-hover);
+    cursor: pointer;
+    background: var(--g-color-base-simple-hover);
 }
 
 .headerCell {
-  background-color: var(--g-color-base-background);
+    background-color: var(--g-color-base-background);
 }
 
 // Это всегда должна быть колонка настроек: прилипает к правому краю
 .headerCellSettings:last-child {
-  flex: 1 1;
-  justify-content: flex-end;
+    flex: 1 1;
+    justify-content: flex-end;
 }
 
 // нужно задавать высоту ячейке, а не ряду из-за особенностей html таблиц
 .cell {
-  height: 40px !important;
-  padding: 7px !important;
-  display: flex !important;
-  align-items: center !important;
+    height: 40px !important;
+    padding: 7px !important;
+    display: flex !important;
+    align-items: center !important;
 }
 
 .wideCell {
-  height: 60px !important;
+    height: 60px !important;
 }

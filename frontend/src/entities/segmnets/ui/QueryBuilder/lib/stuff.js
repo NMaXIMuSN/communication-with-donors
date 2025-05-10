@@ -1,6 +1,6 @@
 import Immutable, {Map} from 'immutable';
 
-import {noop} from '@/shared/lib';
+import {noop} from 'lodash';
 
 export const defaultValue = (value, _default) => {
     return typeof value === 'undefined' ? _default : value;

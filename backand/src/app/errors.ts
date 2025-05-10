@@ -32,6 +32,7 @@ export class BadRequestException extends _BadRequestException {
 
   constructor(message: string = 'Bad Request', code = 'BAD_REQUEST') {
     super(message);
+    this.message = message;
     this.name = 'BadRequestException';
     this.code = code;
   }

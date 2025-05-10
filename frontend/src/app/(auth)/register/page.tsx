@@ -6,7 +6,7 @@ import {FormFieldText, FormRow} from '@/shared/ui';
 import Card from '@/shared/ui/Card/Card';
 import ReactFinalForm from '@/shared/ui/form/ReactFinalForm';
 import {Button} from '@gravity-ui/uikit';
-import {useSearchParams} from 'next/navigation';
+import {useRouter, useSearchParams} from 'next/navigation';
 import {Field} from 'react-final-form';
 
 interface IValue extends IRegisterData {
@@ -17,8 +17,9 @@ interface IValue extends IRegisterData {
 const Register = () => {
     const token = useSearchParams().get('hash') ?? '';
     const hash = encodeURIComponent(token);
+    const router = useRouter();
 
-    const {data} = useRegInfo(hash);
+    const {data, isError} = useRegInfo(hash);
     const {mutate} = useRegister(hash);
 
     const onSubmit = (value: IValue) => {
@@ -26,11 +27,22 @@ const Register = () => {
             return;
         }
 
-        mutate({
-            name: value.name,
-            password: value.password,
-        });
+        mutate(
+            {
+                name: value.name,
+                password: value.password,
+            },
+            {
+                onSuccess() {
+                    router.push('/');
+                },
+            },
+        );
     };
+
+    if (isError) {
+        router.push('/login');
+    }
     return (
         <Card>
             <ReactFinalForm<IValue> onSubmit={onSubmit} initialValues={{email: data?.email}}>

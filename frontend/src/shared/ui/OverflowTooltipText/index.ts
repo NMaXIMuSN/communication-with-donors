@@ -1,1 +1,1 @@
-export { default as OverflowTooltipText } from './OverflowTooltipText';
+export {default as OverflowTooltipText} from './OverflowTooltipText';

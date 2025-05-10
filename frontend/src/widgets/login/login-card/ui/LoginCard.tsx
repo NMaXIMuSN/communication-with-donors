@@ -3,7 +3,6 @@
 import {Button, Card, Text, TextInput} from '@gravity-ui/uikit';
 import {Field, Form} from 'react-final-form';
 import {useRouter} from 'next/navigation';
-import Cookies from 'js-cookie';
 import {axios} from '@/shared/api/axios';
 import {useMutation} from '@tanstack/react-query';
 import {toaster} from '@/shared/toaster/notification';
@@ -23,8 +22,7 @@ export default function LoginCard() {
 
     const {mutateAsync, isPending} = useMutation({
         mutationFn: login,
-        onSuccess: (data) => {
-            Cookies.set('accessToken', data.accessToken, {expires: 7});
+        onSuccess: () => {
             router.push('/');
         },
     });

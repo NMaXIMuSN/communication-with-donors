@@ -1,6 +1,6 @@
 'use client';
 
-import {BranchesDown, ChartPie, Envelope, FileText} from '@gravity-ui/icons';
+import {BranchesDown, ChartPie, Envelope, FileText, Lock, Person} from '@gravity-ui/icons';
 import {MenuItem} from '@gravity-ui/navigation';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
@@ -10,6 +10,8 @@ export const menuItems: MenuItem[] = [
     {title: 'Сегменты', id: 'segments', icon: ChartPie},
     {title: 'Шаблоны', id: 'templates', icon: FileText},
     {title: 'Кампании', id: 'campaigns', icon: Envelope},
+    {title: 'Пользователи', id: 'users', icon: Person},
+    {title: 'Роли', id: 'security', icon: Lock},
 ];
 
 export const useGetMenuItems = () => {

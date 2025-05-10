@@ -1,6 +1,6 @@
 import cn from 'classnames';
 
-import { ICardProps } from '@/shared/ui';
+import {ICardProps} from '@/shared/ui';
 
 import styles from './withCommonStyles.module.scss';
 

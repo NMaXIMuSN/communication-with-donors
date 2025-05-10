@@ -45,7 +45,7 @@ export const TemplateContextProvider: FC<IProps & PropsWithChildren> = (props) =
             });
         }
 
-        return
+        return;
     };
 
     const currentLang = useMemo(() => {

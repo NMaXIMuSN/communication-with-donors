@@ -1,10 +1,10 @@
 .codemirror {
-  border-radius: 12px;
-  overflow: hidden;
-  outline: none !important;
-  border: 1px solid var(--g-color-line-generic);
+    border-radius: 12px;
+    overflow: hidden;
+    outline: none !important;
+    border: 1px solid var(--g-color-line-generic);
 
-  :global(.cm-editor) {
-    height: 100%;
-  }
+    :global(.cm-editor) {
+        height: 100%;
+    }
 }

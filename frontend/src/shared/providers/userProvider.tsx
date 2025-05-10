@@ -1,9 +1,10 @@
 'use client';
 
 import {ReactNode, createContext, useContext} from 'react';
-import {useQuery} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {axios} from '../api/axios';
 import {Loader} from '@gravity-ui/uikit';
+import {usePathname} from 'next/navigation';
 
 export interface Role {
     id: number;
@@ -21,15 +22,16 @@ export type User = {
     name: string;
     email: string;
     role: Role[];
+    createdAt: string;
+    updatedAt: string;
 };
 
 type AuthContextType = {
-    user: User | null;
+    user?: User;
     isLoading: boolean;
 };
 
 const UserContext = createContext<AuthContextType>({
-    user: null,
     isLoading: true,
 });
 
@@ -43,11 +45,28 @@ const fetchCurrentUser = async (): Promise<User | null> => {
     }
 };
 
+export const useUpdateMe = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (data: {name: string; password?: string; newPassword?: string}) => {
+            await axios.post('users/me', data);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ['currentUser'],
+            });
+        },
+    });
+};
+
 export function UserProvider({children}: {children: ReactNode}) {
+    const pathname = usePathname();
+
     const {data: user, isLoading} = useQuery({
         queryKey: ['currentUser'],
         queryFn: fetchCurrentUser,
         retry: 3,
+        enabled: !(pathname.includes('/login') || pathname.includes('/register')),
     });
 
     if (isLoading) {
@@ -55,7 +74,7 @@ export function UserProvider({children}: {children: ReactNode}) {
     }
 
     return (
-        <UserContext.Provider value={{user: user ?? null, isLoading}}>
+        <UserContext.Provider value={{user: user || undefined, isLoading}}>
             {children}
         </UserContext.Provider>
     );

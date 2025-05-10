@@ -19,6 +19,8 @@ services:
     depends_on:
       - app
     env_file: ./frontend/.env
+    environment:
+      - NEXT_PUBLIC_BASE_URL=/api
 
   nginx:
     image: nginx:latest

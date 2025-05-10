@@ -1,8 +1,8 @@
-import { FC, PropsWithChildren } from 'react';
-import { Icon, IconProps, Text } from '@gravity-ui/uikit';
+import {FC, PropsWithChildren} from 'react';
+import {Icon, IconProps, Text} from '@gravity-ui/uikit';
 import cn from 'classnames';
 
-import { ICardProps } from './Card';
+import {ICardProps} from './Card';
 
 import styles from './withIconTitle.module.scss';
 
@@ -11,7 +11,7 @@ interface IHocProps {
     iconTheme?: 'info' | 'warning' | 'utility';
 }
 
-const IconWrapper = ({ icon, iconTheme = 'info' }: IHocProps) => {
+const IconWrapper = ({icon, iconTheme = 'info'}: IHocProps) => {
     return (
         <div className={cn(styles.iconWrapper, styles[iconTheme])}>
             <Icon data={icon} />
@@ -38,7 +38,7 @@ export const withIconTitle = (
         IHocProps
 > => {
     return (props) => {
-        const { title, titleVariant = 'subheader-3', icon, iconTheme, ...otherProps } = props;
+        const {title, titleVariant = 'subheader-3', icon, iconTheme, ...otherProps} = props;
 
         const hocTitleComponent = (
             <div className={styles.titleWithIcon}>

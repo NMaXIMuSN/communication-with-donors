@@ -2,6 +2,7 @@ import {
   ForbiddenException,
   Injectable,
   InternalServerErrorException,
+  IntrinsicException,
   Logger,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
@@ -64,29 +65,66 @@ export class UsersService {
         where: {
           hash,
         },
+        include: {
+          role: true,
+        },
       });
     } catch {
       throw new BadRequestException('Неизвестный хеш');
     }
   }
 
-  async addUser({ email, roleIds }: { email: string; roleIds: number[] }) {
+  async updateUserMe(
+    _user: UserPrisma,
+    data: { password?: string; newPassword?: string; name: string },
+  ) {
     try {
-      const hashedEmail = await hash(email, 10);
+      const user = await this.prisma.user.findUniqueOrThrow({
+        where: {
+          id: _user.id,
+        },
+      });
+      const dataUpdate: Record<string, any> = { name: data.name };
 
       if (
-        await this.prisma.registerUser.count({
-          where: {
-            email: email,
-            hash: hashedEmail,
-          },
-        })
+        data.password &&
+        data.newPassword &&
+        (await compare(data.password, user.password))
       ) {
-        throw new BadRequestException(
-          'Пользователь с такие email уже существует',
-        );
+        const hashedPassword = await hash(data.newPassword, 10);
+
+        dataUpdate.password = hashedPassword;
+      } else if (data.password) {
+        throw new BadRequestException('Неверный пароль для смены');
       }
 
+      await this.prisma.user.update({
+        where: {
+          id: user.id,
+        },
+        data: dataUpdate,
+      });
+    } catch (error) {
+      this.logger.error(error);
+      throw new IntrinsicException(JSON.stringify(error));
+    }
+  }
+
+  async addUser({ email, roleIds }: { email: string; roleIds: number[] }) {
+    const hashedEmail = await hash(email, 10);
+
+    if (
+      await this.prisma.registerUser.count({
+        where: {
+          email: email,
+        },
+      })
+    ) {
+      throw new BadRequestException(
+        'Пользователь с такие email уже существует',
+      );
+    }
+    try {
       const user = await this.prisma.registerUser.create({
         data: {
           hash: hashedEmail,
@@ -123,7 +161,12 @@ export class UsersService {
     }
   }
 
-  async create(email: string, name: string, password: string): Promise<User> {
+  async create(
+    email: string,
+    name: string,
+    password: string,
+    role: number[],
+  ): Promise<User> {
     const hashedPassword = await hash(password, 10);
 
     return this.prisma.user.create({
@@ -131,6 +174,11 @@ export class UsersService {
         email,
         name,
         password: hashedPassword,
+        role: {
+          connect: role.map((el) => ({
+            id: el,
+          })),
+        },
       },
       include: {
         role: {
@@ -145,9 +193,35 @@ export class UsersService {
     });
   }
 
+  async updateRole(email: string, roleIds: number[]) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    if (!user) {
+      throw new BadRequestException('Нет пользователя для редактирования');
+    }
+
+    return await this.prisma.user.update({
+      where: { id: user.id },
+      data: {
+        role: {
+          set: roleIds.map((id) => ({
+            id,
+          })),
+        },
+      },
+      include: {
+        role: true,
+      },
+    });
+  }
+
   async searchUsers({
-    limit,
-    offset,
+    limit = 10,
+    offset = 0,
     search,
     sort,
   }: ISearchVariables<UsersDto>) {
@@ -165,6 +239,12 @@ export class UsersService {
                 equals: isNaN(Number(search)) ? undefined : Number(search),
               },
             },
+            {
+              name: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
           ],
         }
       : undefined;
@@ -176,11 +256,7 @@ export class UsersService {
           skip: offset,
           take: limit,
           include: {
-            role: {
-              include: {
-                permissions: true,
-              },
-            },
+            role: true,
           },
           omit: {
             password: true,
@@ -222,6 +298,8 @@ export class UsersService {
         password: true,
       },
     });
+
+    console.log(user, user && (await compare(password, user.password)));
 
     if (user && (await compare(password, user.password))) {
       return await this.findByEmail(email);

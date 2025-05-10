@@ -8,16 +8,17 @@ const axios = _axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
+    withCredentials: true,
 });
 
 export class AxiosError {
     code: string;
-    messages: string;
+    message: string;
     status: number;
 
-    constructor(error: {code: string; messages: string; status: number}) {
+    constructor(error: {code: string; message: string; status: number}) {
         this.code = error.code;
-        this.messages = error.messages;
+        this.message = error.message;
         this.status = error.status;
     }
 }

@@ -1,54 +1,54 @@
 .form {
-  width: 100%;
-
-  :global(.cc-form-layout__row) {
     width: 100%;
-  }
 
-  // стили для выравнивания контента внутри формы
-  :global(.cc-form-layout__row-left) {
-    padding-block-start: 0;
-    width: 30%;
-  }
+    :global(.cc-form-layout__row) {
+        width: 100%;
+    }
 
-  :global(.cc-form-layout__row-title_required::after) {
-    inset-inline-end: -12px;
-  }
+    // стили для выравнивания контента внутри формы
+    :global(.cc-form-layout__row-left) {
+        padding-block-start: 0;
+        width: 30%;
+    }
 
-  :global(.yc-radio-button__option) {
-    flex: 1 1 0;
-  }
+    :global(.cc-form-layout__row-title_required::after) {
+        inset-inline-end: -12px;
+    }
 
-  // стили для инпутов, что бы перебить дефолтные стили ошибки
-  :global(.yc-field-wrapper_state_error) {
+    :global(.yc-radio-button__option) {
+        flex: 1 1 0;
+    }
+
+    // стили для инпутов, что бы перебить дефолтные стили ошибки
+    :global(.yc-field-wrapper_state_error) {
+        :global(.g-text-input__content) {
+            border-color: var(--g-color-text-danger);
+        }
+
+        :global(.g-text-input__content:focus-within) {
+            outline-width: 1px;
+        }
+    }
+
     :global(.g-text-input__content) {
-      border-color: var(--g-color-text-danger);
+        overflow: hidden;
     }
 
-    :global(.g-text-input__content:focus-within) {
-      outline-width: 1px;
+    :global(.g-text-input__control) {
+        border: none;
     }
-  }
 
-  :global(.g-text-input__content) {
-    overflow: hidden;
-  }
+    :global(.g-text-input__control:hover) {
+        border: none;
+    }
 
-  :global(.g-text-input__control) {
-    border: none;
-  }
+    :global(.g-text-input__control:focus) {
+        border: none;
+    }
 
-  :global(.g-text-input__control:hover) {
-    border: none;
-  }
-
-  :global(.g-text-input__control:focus) {
-    border: none;
-  }
-
-  // аватарка
-  :global(.yc-user__avatar) {
-    width: 16px;
-    height: 16px;
-  }
+    // аватарка
+    :global(.yc-user__avatar) {
+        width: 16px;
+        height: 16px;
+    }
 }

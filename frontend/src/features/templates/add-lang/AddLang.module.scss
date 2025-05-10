@@ -1,23 +1,23 @@
 .list {
-  width: 140px;
+    width: 140px;
 
-  &Wrapper {
-    padding: 8px 0px;
-  }
-
-  &Item {
-    cursor: pointer;
-    padding: 4px 8px;
-    transition: all .3s ease;
-
-    &Disabled {
-      pointer-events: none;
-
-      color: var(--g-color-text-secondary)
+    &Wrapper {
+        padding: 8px 0px;
     }
 
-    &:hover {
-      background-color: var(--g-color-base-simple-hover);
+    &Item {
+        cursor: pointer;
+        padding: 4px 8px;
+        transition: all 0.3s ease;
+
+        &Disabled {
+            pointer-events: none;
+
+            color: var(--g-color-text-secondary);
+        }
+
+        &:hover {
+            background-color: var(--g-color-base-simple-hover);
+        }
     }
-  }
 }

@@ -1,17 +1,43 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { InjectBot } from 'nestjs-telegraf';
 import { Telegraf } from 'telegraf';
 import { Message } from 'telegraf/typings/core/types/typegram';
 
-const telegraf = new Telegraf(process.env.TG_BOT_KEY as string);
-telegraf.launch();
-
 @Injectable()
 export class TelegramService {
-  private bot = telegraf;
-  private botSend = telegraf.telegram;
+  private reconnectInterval = 30000; // 30 секунд
 
-  constructor(private logger: Logger) {
-    this.bot.command('chatId', (ctx) => this.handleChatIdCommand(ctx));
+  constructor(
+    @InjectBot() private readonly bot: Telegraf,
+    private logger: Logger,
+  ) {
+    this.setupBot();
+  }
+
+  private setupBot() {
+    this.bot.command('chatId', async (ctx) => {
+      try {
+        const chatId = ctx.chat.id;
+        await ctx.reply(`Chat ID: ${chatId}`, { parse_mode: 'Markdown' });
+      } catch (error) {
+        this.logger.error('Ошибка при обработке команды /chatId', error);
+      }
+    });
+
+    this.bot.catch((err) => {
+      this.logger.error('Ошибка в Telegraf', err);
+      setTimeout(() => this.reconnectBot(), this.reconnectInterval);
+    });
+  }
+
+  private async reconnectBot() {
+    try {
+      await this.bot.launch();
+      this.logger.log('Бот успешно переподключен');
+    } catch (error) {
+      this.logger.error('Ошибка при переподключении бота', error);
+      setTimeout(() => this.reconnectBot(), this.reconnectInterval);
+    }
   }
 
   private handleChatIdCommand(ctx: any) {
@@ -23,8 +49,11 @@ export class TelegramService {
     chatId: string | number,
     message: string,
   ): Promise<Message.TextMessage | undefined> {
+    if (!this.bot?.telegram) {
+      return;
+    }
     try {
-      return await this.botSend.sendMessage(chatId, message, {
+      return await this.bot.telegram?.sendMessage(chatId, message, {
         parse_mode: 'MarkdownV2',
       });
     } catch (error) {

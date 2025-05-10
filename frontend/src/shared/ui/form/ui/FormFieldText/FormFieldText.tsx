@@ -52,7 +52,7 @@ const FormFieldText: React.FC<IProps> = (props) => {
 
     return (
         <FormField meta={meta} className={className} noErrorMessage={noErrorMessage}>
-            <TextInput {...inputProps} autoComplete={autoComplete}/>
+            <TextInput {...inputProps} autoComplete={autoComplete} />
         </FormField>
     );
 };

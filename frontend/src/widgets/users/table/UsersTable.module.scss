@@ -1,0 +1,12 @@
+.search {
+    width: 350px;
+    padding: auto;
+    padding: 0 24px;
+}
+
+.table {
+    :global(.gt-table__cell.gt-table__cell) {
+        height: auto !important;
+        align-items: flex-start !important;
+    }
+}

@@ -1,1 +1,1 @@
-export { default as FaqButton } from './FaqButton';
+export {default as FaqButton} from './FaqButton';

@@ -1,25 +1,25 @@
 .row {
-  display: flex;
-  align-items: first baseline;
-  width: 100%;
+    display: flex;
+    align-items: first baseline;
+    width: 100%;
 
-  &:not(:last-child) {
-    margin-bottom: 12px;
-  }
+    &:not(:last-child) {
+        margin-bottom: 12px;
+    }
 }
 
 .vertical {
-  flex-direction: column;
+    flex-direction: column;
 }
 
 .label {
-  flex-basis: 25%;
-  flex-shrink: 0;
-  margin-right: 8px;
+    flex-basis: 25%;
+    flex-shrink: 0;
+    margin-right: 8px;
 
-  &.required:after {
-    content: "*";
-    color: red;
-    margin-left: 1px;
-  }  
+    &.required:after {
+        content: '*';
+        color: red;
+        margin-left: 1px;
+    }
 }

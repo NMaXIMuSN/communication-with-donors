@@ -1,15 +1,15 @@
 .card {
-  padding-block-start: 20px;
-  padding-block-end: 8px;
-  padding-inline-start: 0;
-  padding-inline-end: 0;
+    padding-block-start: 20px;
+    padding-block-end: 8px;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
 }
 
 .title {
-  padding-inline-start: 20px;
-  padding-inline-end: 20px;
+    padding-inline-start: 20px;
+    padding-inline-end: 20px;
 
-  & > * {
-    width: 100%;
-  }
+    & > * {
+        width: 100%;
+    }
 }

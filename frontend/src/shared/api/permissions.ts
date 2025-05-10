@@ -1,7 +1,7 @@
 import {Record} from 'immutable';
 import {useUser} from '../providers/userProvider';
 
-enum Entity {
+export enum Entity {
     SEGMENT = 'SEGMENT',
     SOURCE = 'SOURCE',
     CAMPAIGN = 'CAMPAIGN',
@@ -9,7 +9,7 @@ enum Entity {
     TEMPLATE = 'TEMPLATE',
 }
 
-enum Action {
+export enum Action {
     VIEW = 'VIEW',
     CREATE = 'CREATE',
     DELETE = 'DELETE',

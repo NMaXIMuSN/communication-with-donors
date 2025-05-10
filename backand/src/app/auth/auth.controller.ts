@@ -5,13 +5,16 @@ import {
   UnauthorizedException,
   UseInterceptors,
   ClassSerializerInterceptor,
+  Get,
+  Param,
+  Res,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service';
-import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { AccessTokenDto, LoginDto } from './dto/Auth.dto';
+import { LoginDto } from './dto/Auth.dto';
+import { UsersDto } from '../users/dto/Users.dto';
+import { Response } from 'express';
 
-@ApiTags('Users')
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('auth')
 export class AuthController {
@@ -21,18 +24,64 @@ export class AuthController {
   ) {}
 
   @Post('login')
-  @ApiOkResponse({ type: AccessTokenDto })
-  @ApiOperation({ summary: 'Авторизация пользователя' })
-  async login(@Body() loginDto: LoginDto) {
+  async login(
+    @Body() loginDto: LoginDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const user = await this.usersService.validateUser(
       loginDto.email,
       loginDto.password,
     );
 
+    console.log(user);
+
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    return this.authService.login(user);
+    const { accessToken } = this.authService.login(user);
+
+    res.cookie('accessToken', accessToken, {
+      maxAge: 3600000 * 24,
+    });
+
+    return { accessToken };
+  }
+
+  @Post('logout')
+  logout(@Res({ passthrough: true }) res: Response) {
+    res.clearCookie('accessToken');
+    return;
+  }
+
+  @Get('register/info/:hash')
+  async getRegInfo(@Param('hash') hash: string) {
+    return await this.usersService.getRegInfo(hash);
+  }
+
+  @Post('register/info/:hash')
+  async getRegister(
+    @Param('hash') hash: string,
+    @Body() data: { name: string; password: string },
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { email, role } = await this.usersService.getInfoByHash(hash);
+
+    const user = new UsersDto(
+      await this.usersService.create(
+        email,
+        data.name,
+        data.password,
+        role.map(({ id }) => id),
+      ),
+    );
+
+    const { accessToken } = this.authService.login(user);
+
+    res.cookie('accessToken', accessToken, {
+      maxAge: 3600000 * 24,
+    });
+
+    return { accessToken };
   }
 }

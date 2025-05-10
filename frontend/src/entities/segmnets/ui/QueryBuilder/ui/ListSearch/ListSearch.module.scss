@@ -1,17 +1,17 @@
 .wrapper {
-  border-block-end: 1px solid var(--g-color-line-generic);
+    border-block-end: 1px solid var(--g-color-line-generic);
 }
 
 .search {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  margin-block-start: 16px;
-  margin-block-end: 16px;
-  gap: 8px;
-  padding-inline-end: 12px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-block-start: 16px;
+    margin-block-end: 16px;
+    gap: 8px;
+    padding-inline-end: 12px;
 }
 
 .input {
-  height: 28px;
+    height: 28px;
 }

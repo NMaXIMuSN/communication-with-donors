@@ -1,38 +1,38 @@
 .row {
-  position: relative;
-  display: flex;
-  cursor: pointer;
-  pointer-events: all;
-  justify-content: flex-start;
-  align-items: center;
+    position: relative;
+    display: flex;
+    cursor: pointer;
+    pointer-events: all;
+    justify-content: flex-start;
+    align-items: center;
 
-  &:hover {
-    background-color: var(--g-color-base-simple-hover);
-  }
-
-  &[data-dragging='true'] {
-    border: none;
-    background-color: var(--g-color-base-simple-hover);
-
-    &::after {
-      display: none;
+    &:hover {
+        background-color: var(--g-color-base-simple-hover);
     }
-  }
+
+    &[data-dragging='true'] {
+        border: none;
+        background-color: var(--g-color-base-simple-hover);
+
+        &::after {
+            display: none;
+        }
+    }
 }
 
 .checkCell {
-  height: 34px;
-  color: var(--g-color-text-info);
+    height: 34px;
+    color: var(--g-color-text-info);
 }
 
 .cell {
-  height: 34px;
-  padding-block-start: 8px;
-  padding-block-end: 8px;
-  padding-inline-start: 12px;
-  padding-inline-end: 12px;
+    height: 34px;
+    padding-block-start: 8px;
+    padding-block-end: 8px;
+    padding-inline-start: 12px;
+    padding-inline-end: 12px;
 }
 
 .action {
-  padding: 4px;
+    padding: 4px;
 }

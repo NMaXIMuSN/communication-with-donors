@@ -1,86 +1,86 @@
 .formField {
-  width: 100%;
-
-  .select {
     width: 100%;
 
-    &WithLabels {
-      color: transparent;
+    .select {
+        width: 100%;
+
+        &WithLabels {
+            color: transparent;
+        }
+
+        :global(.g-popover__handler) {
+            padding-inline-end: 4px;
+        }
     }
 
-    :global(.g-popover__handler) {
-      padding-inline-end: 4px;
-    }
-  }
+    :global(.yc-field-wrapper_state_error) {
+        :global(.g-text-input__content) {
+            border-color: var(--g-color-text-danger);
+        }
 
-  :global(.yc-field-wrapper_state_error) {
-    :global(.g-text-input__content) {
-      border-color: var(--g-color-text-danger);
+        :global(.g-select-control__button::before) {
+            border-color: var(--g-color-text-danger);
+        }
     }
-
-    :global(.g-select-control__button::before) {
-      border-color: var(--g-color-text-danger);
-    }
-  }
 }
 
 .hideErrorText {
-  :global(.yc-field-wrapper__error-text) {
-    display: none;
-  }
+    :global(.yc-field-wrapper__error-text) {
+        display: none;
+    }
 }
 
 .popup {
-  width: 100%;
+    width: 100%;
 
-  :global(.g-select-list) {
-    max-height: 224px;
-  }
-
-  :global(.g-select-list__option_disabled) {
-    :hover {
-      background: inherit;
-      background-color: inherit;
+    :global(.g-select-list) {
+        max-height: 224px;
     }
 
-    :global(.g-select-list__tick-icon) {
-      color: var(--g-color-text-hint);
-    }
-  }
+    :global(.g-select-list__option_disabled) {
+        :hover {
+            background: inherit;
+            background-color: inherit;
+        }
 
-  :global(.g-select-list__option) {
-    justify-content: space-between;
-
-    :global(.g-select-list__tick-icon) {
-      order: 1;
+        :global(.g-select-list__tick-icon) {
+            color: var(--g-color-text-hint);
+        }
     }
-  }
+
+    :global(.g-select-list__option) {
+        justify-content: space-between;
+
+        :global(.g-select-list__tick-icon) {
+            order: 1;
+        }
+    }
 }
 
 .labels {
-  margin-block-start: 8px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+    margin-block-start: 8px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .filterWrapper {
-  padding: 8px;
-  border-block-end: 1px solid var(--g-color-line-generic);
+    padding: 8px;
+    border-block-end: 1px solid var(--g-color-line-generic);
 }
 
 .ActionsMultipleFooter {
-  display: flex;
-  width: 100%;
-  gap: 8px;
-  padding: 8px;
-  border-block-start: 1px solid var(--g-color-line-generic);
+    display: flex;
+    width: 100%;
+    gap: 8px;
+    padding: 8px;
+    border-block-start: 1px solid var(--g-color-line-generic);
 
-  > * {
-    flex: 1;
-  }
+    > * {
+        flex: 1;
+    }
 }
 
 .emptyOptionsWrapper {
-  padding: 16px;
+    padding: 16px;
 }

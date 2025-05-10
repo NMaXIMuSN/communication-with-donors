@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Flex, Loader, Switch, Text } from '@gravity-ui/uikit';
+import React, {useState} from 'react';
+import {Flex, Loader, Switch, Text} from '@gravity-ui/uikit';
 
-import { ICardProps } from '@/shared/ui';
+import {ICardProps} from '@/shared/ui';
 
 import styles from './withSwitch.module.scss';
 
@@ -76,7 +76,7 @@ export const withSwitch = <P extends ICardProps>(WrappedCard: React.ComponentTyp
                                     </Text>
                                 </div>
                             )}
-                            {isChecked ?? internalChecked ? children : null}
+                            {(isChecked ?? internalChecked) ? children : null}
                         </>
                     )}
                 </WrappedCard>

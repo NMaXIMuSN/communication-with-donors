@@ -1,23 +1,23 @@
 .fieldWrapper {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  vertical-align: top;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    vertical-align: top;
 
-  & > * {
-      vertical-align: top;
-  }
+    & > * {
+        vertical-align: top;
+    }
 
-  &ErrorText {
-      margin-top: 2px;
-      white-space: normal;
-  }
+    &ErrorText {
+        margin-top: 2px;
+        white-space: normal;
+    }
 
-  &StateError {
-      --g-select-border-color: var(--g-color-line-danger);
-      --g-text-input-border-color: var(--g-color-line-danger);
-      --g-text-area-border-color: var(--g-color-line-danger);
-  }
+    &StateError {
+        --g-select-border-color: var(--g-color-line-danger);
+        --g-text-input-border-color: var(--g-color-line-danger);
+        --g-text-area-border-color: var(--g-color-line-danger);
+    }
 }
 
 .field {

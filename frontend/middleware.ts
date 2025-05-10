@@ -15,4 +15,3 @@ export const withAuth = <P extends WithRouterProps, C extends BaseContext = Next
         return Component;
     };
 };
-
