@@ -12,16 +12,18 @@ export class MailService {
   constructor(private readonly mailerService: MailerService) {}
 
   async sendCampaignEmail(
-    to: string = '89774964874m@gmail.com',
+    to: string,
+    id: number,
+    subject: string | undefined,
     dynamicHtmlContent: string,
   ) {
     await this.mailerService.sendMail({
       to,
-      subject: 'Тестовая отправка',
+      subject: subject,
       template: join(__dirname, './template.hbs'),
       context: {
         dynamicContent: dynamicHtmlContent,
-        unsubscribeLink: 'http://example.com/unsubscribe?user=123',
+        unsubscribeLink: `${process.env.CORS}/unsubscribe?user=${id}`,
         year: new Date().getFullYear(),
       },
     });
@@ -62,7 +64,7 @@ export class MailService {
       subject: 'Регистрация в donor crm',
       template: join(__dirname, './confirmation.hbs'),
       context: {
-        url: `http://localhost:3001/register?hash=${token}`,
+        url: `${process.env.CORS}/register?hash=${token}`,
         year: new Date().getFullYear(),
       },
     });

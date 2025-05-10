@@ -17,8 +17,7 @@ export class PermissionsService {
   async getRole() {
     try {
       return await this.prismaService.role.findMany({});
-    } catch (error) {
-      console.log(error);
+    } catch {
       return [];
     }
   }
@@ -30,8 +29,7 @@ export class PermissionsService {
           permissions: true,
         },
       });
-    } catch (error) {
-      console.log(error);
+    } catch {
       return [];
     }
   }

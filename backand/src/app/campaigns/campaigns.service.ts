@@ -33,7 +33,7 @@ export class CampaignsService {
         },
       });
     } catch (error) {
-      console.log(error);
+      this.logger.error(error);
     }
   }
 
@@ -98,8 +98,7 @@ export class CampaignsService {
           lastPage: Math.ceil(total / (limit || 0)),
         },
       };
-    } catch (error) {
-      console.log(JSON.stringify(error));
+    } catch {
       return {
         data: [],
         page: {

@@ -91,6 +91,8 @@ export class OffersWorker {
                 }
                 await this.mailService.sendCampaignEmail(
                   donorInfo.email,
+                  donorInfo.id,
+                  offer.setting.subject ?? undefined,
                   this.templateService.fillText(offer.setting.content, {
                     offer,
                     donorInfo,

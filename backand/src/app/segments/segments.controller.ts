@@ -50,8 +50,6 @@ export class SegmentsController {
   @UseGuards(PermissionsGuard)
   @RequirePermissions($Enums.Entity.SEGMENT, $Enums.Action.VIEW)
   async findOne(@Param('id') id: string) {
-    console.log(id);
-
     return await this.segmentsService.findOne(+id);
   }
 

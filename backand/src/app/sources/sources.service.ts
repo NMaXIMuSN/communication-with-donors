@@ -96,7 +96,6 @@ export class SourcesService {
         },
       });
     } catch (error) {
-      console.log(error);
       throw new UnknownErrorException(JSON.stringify(error));
     }
   }
@@ -187,7 +186,6 @@ export class SourcesService {
     }
 
     const data = await this.prismaDonor[name]?.findMany({ take: 10 });
-    console.log(res);
 
     return {
       table: res.map((el) => ({

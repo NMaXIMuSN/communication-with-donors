@@ -33,8 +33,6 @@ export class AuthController {
       loginDto.password,
     );
 
-    console.log(user);
-
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }

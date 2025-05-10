@@ -68,8 +68,6 @@ export class CampaignsController {
   @UseGuards(PermissionsGuard)
   @RequirePermissions($Enums.Entity.CAMPAIGN, $Enums.Action.EDIT)
   async update(@Param('id') id: string, @Body() updateCampaignDto: any) {
-    console.log(updateCampaignDto);
-
     return await this.campaignsService.update(+id, updateCampaignDto);
   }
 

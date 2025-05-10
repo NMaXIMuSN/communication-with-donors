@@ -67,8 +67,7 @@ export class TemplatesService {
           lastPage: Math.ceil(total / (limit || 0)),
         },
       };
-    } catch (error) {
-      console.log(JSON.stringify(error));
+    } catch {
       return {
         data: [],
         page: {
@@ -192,7 +191,5 @@ export class TemplatesService {
       // Если значение удалось найти, возвращаем его, иначе оставляем оригинальный плейсхолдер
       return value !== undefined ? String(value) : _;
     });
-
-    return filledContent;
   }
 }

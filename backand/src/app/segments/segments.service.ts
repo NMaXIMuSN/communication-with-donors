@@ -52,8 +52,6 @@ export class SegmentsService {
   }
 
   async getSource(id: number) {
-    console.log(id);
-
     return await this.prisma.segment.findUnique({
       where: { id },
       include: {
@@ -113,8 +111,7 @@ export class SegmentsService {
           lastPage: Math.ceil(total / (limit || 0)),
         },
       };
-    } catch (error) {
-      console.log(JSON.stringify(error));
+    } catch {
       return {
         data: [],
         page: {

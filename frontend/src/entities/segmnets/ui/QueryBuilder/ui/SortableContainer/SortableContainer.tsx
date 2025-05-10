@@ -530,7 +530,6 @@ const createSortableContainer = <T extends ISortableContainer>(
             const key = uuid();
 
             const type = this.props.config.fields[field].type;
-            console.log(type, this.props.config.types[type]);
             const defaultOperator = this.props.config.types[type].defaultOperator;
 
             const properties = Immutable.OrderedMap(

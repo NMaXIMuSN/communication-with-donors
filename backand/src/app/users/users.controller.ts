@@ -42,7 +42,6 @@ export class UsersController {
     @Body() data: { password?: string; newPassword?: string; name: string },
     @Req() { user }: { user: User },
   ): Promise<void> {
-    console.log(data);
     return await this.usersService.updateUserMe(user, data);
   }
 

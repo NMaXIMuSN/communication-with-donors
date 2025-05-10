@@ -141,7 +141,6 @@ export class UsersService {
 
       return user;
     } catch (error) {
-      console.log(error);
       throw new InternalServerErrorException(JSON.stringify(error));
     }
   }
@@ -298,8 +297,6 @@ export class UsersService {
         password: true,
       },
     });
-
-    console.log(user, user && (await compare(password, user.password)));
 
     if (user && (await compare(password, user.password))) {
       return await this.findByEmail(email);
