@@ -24,9 +24,9 @@ export class AxiosError {
 }
 
 axios.interceptors.request.use((config) => {
-    const token = Cookies.get('accessToken');
-    if (token && config.headers) {
-        config.headers.Authorization = `Bearer ${token}`;
+    const csrfToken = Cookies.get('csrfToken');
+    if (csrfToken && config.headers) {
+        config.headers['X-CSRF-Token'] = csrfToken;
     }
     return config;
 });

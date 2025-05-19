@@ -8,6 +8,7 @@ import {
   Get,
   Param,
   Res,
+  Req,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service';
@@ -22,6 +23,11 @@ export class AuthController {
     private readonly usersService: UsersService,
     private readonly authService: AuthService,
   ) {}
+
+  @Get('csrf-token')
+  getCsrf(@Req() req) {
+    return { csrfToken: req.csrfToken() };
+  }
 
   @Post('login')
   async login(
@@ -41,6 +47,9 @@ export class AuthController {
 
     res.cookie('accessToken', accessToken, {
       maxAge: 3600000 * 24,
+      httpOnly: true,
+      // secure: true,
+      sameSite: 'strict',
     });
 
     return { accessToken };
@@ -78,6 +87,9 @@ export class AuthController {
 
     res.cookie('accessToken', accessToken, {
       maxAge: 3600000 * 24,
+      httpOnly: true,
+      // secure: true,
+      sameSite: 'strict',
     });
 
     return { accessToken };
